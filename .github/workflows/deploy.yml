@@ -39,4 +39,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{github.ref_name}}
-          files: build/windows/runner/Release/train_map-${{github.ref_name}}-windows.zip
+          files: build/windows/x64/runner/Release/train_map-${{github.ref_name}}-windows.zip
