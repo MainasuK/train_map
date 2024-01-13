@@ -31,7 +31,7 @@ jobs:
         with:
           type: "zip"
           filename: train_map-${{github.ref_name}}-windows.zip
-          directory: build/windows/runner/Release
+          directory: build/windows/x64/runner/Release
 
       - name: Release to github
         uses: softprops/action-gh-release@v1
