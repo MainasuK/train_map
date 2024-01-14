@@ -33,10 +33,8 @@ jobs:
           filename: train_map-${{github.ref_name}}-windows.zip
           directory: build/windows/x64/runner/Release
 
-      - name: Release to github
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Release
+        uses: ncipollo/release-action@v1.12.0
         with:
-          tag_name: ${{github.ref_name}}
-          files: train_map-${{github.ref_name}}-windows.zip
+          artifacts: train_map-${{github.ref_name}}-windows.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
