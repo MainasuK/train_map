@@ -33,8 +33,7 @@ jobs:
           filename: train_map-${{github.ref_name}}-windows.zip
           directory: build/windows/x64/runner/Release
 
-      - name: Upload Release
-        uses: ncipollo/release-action@v1.12.0
+      - uses: actions/upload-artifact@v4
         with:
-          artifacts: train_map-${{github.ref_name}}-windows.zip
-          token: ${{ secrets.GITHUB_TOKEN }}
+          name: train_map-${{github.ref_name}}-windows.zip
+          path: train_map-${{github.ref_name}}-windows.zip
