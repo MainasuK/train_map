@@ -3,7 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  objectbox_flutter_libs
+  file_selector_windows
+  realm
   url_launcher_windows
 )
 

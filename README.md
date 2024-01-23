@@ -18,7 +18,7 @@ samples, guidance on mobile development, and a full API reference.
 # Packages
 
 - https://github.com/adrianos42/desktop
-- https://github.com/objectbox/objectbox-dart
 - https://github.com/dart-lang/dart_style
 - https://github.com/google/quiver-dart
 - https://github.com/luizbarboza/d4_dsv
+- https://github.com/realm/realm-dart

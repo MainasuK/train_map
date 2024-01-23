@@ -35,5 +35,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: train_map-${{github.ref_name}}-windows.zip
+          name: train_map-${{github.ref_name}}-windows
           path: build/windows/x64/runner/Release/train_map-${{github.ref_name}}-windows.zip

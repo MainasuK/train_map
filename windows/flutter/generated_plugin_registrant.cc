@@ -6,12 +6,15 @@
 
 #include "generated_plugin_registrant.h"
 
-#include <objectbox_flutter_libs/objectbox_flutter_libs_plugin.h>
+#include <file_selector_windows/file_selector_windows.h>
+#include <realm/realm_plugin.h>
 #include <url_launcher_windows/url_launcher_windows.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
-  ObjectboxFlutterLibsPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("ObjectboxFlutterLibsPlugin"));
+  FileSelectorWindowsRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FileSelectorWindows"));
+  RealmPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("RealmPlugin"));
   UrlLauncherWindowsRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("UrlLauncherWindows"));
 }
