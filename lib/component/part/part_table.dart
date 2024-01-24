@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:desktop/desktop.dart';
 import 'package:provider/provider.dart';
@@ -10,10 +9,10 @@ import 'package:animated_tree_view/tree_view/tree_node.dart' as tree;
 
 class PartTable extends StatelessWidget {
   const PartTable({
-    Key? key,
+    super.key,
     required this.parts,
     this.isBlueprintInfoDisplay = false,
-  }) : super(key: key);
+  });
 
   final List<Part> parts;
   final bool isBlueprintInfoDisplay;

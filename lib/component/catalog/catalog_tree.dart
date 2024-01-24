@@ -7,10 +7,9 @@ import 'package:flutter/material.dart' as material;
 import 'package:provider/provider.dart';
 import 'package:train_map/database/schemas.dart';
 import 'package:train_map/home.dart';
-import 'package:train_map/main.dart' as main;
 
 class CatalogTree extends StatelessWidget {
-  const CatalogTree({Key? key, required this.catalogs}) : super(key: key);
+  const CatalogTree({super.key, required this.catalogs});
   final List<Catalog> catalogs;
 
   tree.TreeNode<dynamic> _tree() {
@@ -83,15 +82,5 @@ class CatalogTree extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-class _Title extends StatelessWidget {
-  const _Title({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-        padding: EdgeInsets.only(top: 12.0), child: Text('Train Map'));
   }
 }

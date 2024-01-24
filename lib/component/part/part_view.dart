@@ -4,9 +4,9 @@ import 'package:train_map/database/schemas.dart';
 
 class PartView extends StatelessWidget {
   const PartView({
-    Key? key,
+    super.key,
     required this.part,
-  }) : super(key: key);
+  });
 
   final Part part;
 

@@ -4,10 +4,10 @@ import 'package:train_map/database/schemas.dart';
 
 class BlueprintTable extends StatelessWidget {
   const BlueprintTable({
-    Key? key,
+    super.key,
     required this.catalogs,
     required this.blueprints,
-  }) : super(key: key);
+  });
 
   final List<Catalog> catalogs;
   final List<Blueprint> blueprints;

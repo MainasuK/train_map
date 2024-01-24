@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:desktop/desktop.dart';
-import 'package:flutter/material.dart' as material;
 import 'package:realm/realm.dart';
 import 'package:train_map/component/catalog/catalog_tree.dart';
 import 'package:train_map/control/copy_text_button.dart';
@@ -112,7 +111,7 @@ class _HomeState extends State<Home> {
                     context: context,
                   ),
                   CopyTextButton(
-                    '${main.App.realm.config.path}',
+                    main.App.realm.config.path,
                     title: '数据库存储：',
                     context: context,
                   ),
@@ -230,11 +229,11 @@ class DetailView extends StatelessWidget {
   final Blueprint? blueprint;
 
   const DetailView({
-    Key? key,
+    super.key,
     required this.kind,
     this.catalog,
     required this.blueprint,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

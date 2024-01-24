@@ -1,9 +1,7 @@
-import 'dart:math';
 import 'dart:developer' as developer;
 import 'dart:typed_data';
 
 import 'package:desktop/desktop.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:multi_split_view/multi_split_view.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +14,7 @@ import 'package:train_map/main.dart' as main;
 class BlueprintPage extends StatefulWidget {
   final Blueprint blueprint;
 
-  const BlueprintPage({Key? key, required this.blueprint}) : super(key: key);
+  const BlueprintPage({super.key, required this.blueprint});
 
   @override
   State<BlueprintPage> createState() => _BlueprintPageState();
@@ -118,7 +116,7 @@ class _BlueprintPageState extends State<BlueprintPage> {
 
 class _PhotoView extends StatelessWidget {
   final Uint8List? imageData;
-  const _PhotoView({Key? key, required this.imageData}) : super(key: key);
+  const _PhotoView({required this.imageData});
 
   @override
   Widget build(BuildContext context) {

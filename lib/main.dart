@@ -1,11 +1,12 @@
-import 'dart:io';
 import 'dart:developer';
 
 import 'package:desktop/desktop.dart';
 import 'package:flutter/material.dart' as material;
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:realm/realm.dart';
 import 'package:train_map/database/schemas.dart';
 import 'package:train_map/home.dart';
+import 'package:train_map/vendor/desktop_l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ Future<void> main() async {
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   static late Realm realm;
 
@@ -38,7 +39,16 @@ class App extends StatelessWidget {
         decoration: const BoxDecoration(color: material.Colors.white),
         child: const Home(),
       ),
-      locale: Locale(Platform.localeName.split('_')[0]),
+      supportedLocales: const [
+        Locale.fromSubtags(
+            languageCode: 'zh', scriptCode: 'Hans', countryCode: 'CN'),
+      ],
+      localizationsDelegates: [
+        NewDesktopLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
     );
   }
 }

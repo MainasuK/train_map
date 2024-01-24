@@ -4,11 +4,10 @@ import 'package:flutter/services.dart';
 class CopyTextButton extends Button {
   CopyTextButton(
     String text, {
-    Key? key,
+    super.key,
     String title = '',
     required BuildContext context,
   }) : super(
-          key: key,
           body: Text.rich(
             TextSpan(
               children: [

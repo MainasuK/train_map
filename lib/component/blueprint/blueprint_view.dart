@@ -4,9 +4,9 @@ import 'package:train_map/database/schemas.dart';
 
 class BlueprintView extends StatelessWidget {
   const BlueprintView({
-    Key? key,
+    super.key,
     required this.blueprint,
-  }) : super(key: key);
+  });
 
   final Blueprint blueprint;
 

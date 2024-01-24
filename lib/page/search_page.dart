@@ -7,7 +7,7 @@ import 'package:train_map/database/schemas.dart';
 import 'package:train_map/main.dart' as main;
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
