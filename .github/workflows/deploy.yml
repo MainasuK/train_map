@@ -21,7 +21,9 @@ jobs:
         run: flutter pub get
 
       - name: Generate intermediates
-        run: dart run realm generate
+        run: |
+          dart run realm generate
+          flutter pub run flutter_launcher_icons
 
       - name: Build Windows
         run: flutter build windows --release

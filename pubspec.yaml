@@ -47,6 +47,7 @@ dependencies:
   image_picker: ^1.0.7
   multi_split_view: ^2.4.0
   package_info_plus: ^5.0.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,14 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+flutter_launcher_icons:
+  windows:
+    generate: true
+    image_path: "assets/icon/app_icon.jpg"
+    icon_size: 256
+  macos:
+    generate: true
+    image_path: "assets/icon/app_icon.jpg"
 
 # The following section is specific to Flutter packages.
 flutter:
