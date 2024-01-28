@@ -21,13 +21,15 @@ class BlueprintPage extends StatefulWidget {
 }
 
 class _BlueprintPageState extends State<BlueprintPage> {
-  double minScale = 0.5;
+  double minScale = 0.01;
   double maxScale = 4.0;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => _BlueprintPageViewModel(widget.blueprint),
+    final viewModel = _BlueprintPageViewModel(widget.blueprint);
+
+    return ChangeNotifierProvider.value(
+      value: viewModel,
       child: MultiSplitViewTheme(
         data:
             MultiSplitViewThemeData(dividerPainter: DividerPainters.grooved1()),
@@ -82,11 +84,45 @@ class _BlueprintPageState extends State<BlueprintPage> {
                     ),
                   ),
                   Expanded(
-                    child: InteractiveViewer(
-                      constrained: false,
-                      minScale: minScale,
-                      maxScale: maxScale,
-                      child: _PhotoView(imageData: viewModel.image),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        developer.log(
+                            'blueprint image container maxWidth: ${constraints.maxWidth}, maxHeight: ${constraints.maxHeight}, imageSize: ${viewModel.imageSize}');
+
+                        return InteractiveViewer(
+                          constrained: false,
+                          minScale: minScale,
+                          maxScale: maxScale,
+                          scaleEnabled: true,
+                          boundaryMargin: () {
+                            if (viewModel.imageSize != null &&
+                                viewModel.imageSize!.width > 0.0 &&
+                                viewModel.imageSize!.height > 0.0 &&
+                                constraints.maxWidth > 0.0 &&
+                                constraints.maxHeight > 0.0) {
+                              final imageSize = viewModel.imageSize!;
+                              // cW/cH = (2 * margin + imageW)/imageH
+                              // margin = ((cW/cH) * imageH - imageW) / 2
+                              final margin = (((constraints.maxWidth /
+                                              constraints.maxHeight) *
+                                          imageSize.height) -
+                                      imageSize.width) *
+                                  0.5;
+                              developer.log('margin: $margin');
+                              return EdgeInsets.symmetric(
+                                horizontal: (margin > 0)
+                                    ? margin
+                                    : constraints.maxWidth,
+                              );
+                            } else {
+                              return EdgeInsets.symmetric(
+                                horizontal: constraints.maxWidth,
+                              );
+                            }
+                          }(),
+                          child: _PhotoView(imageData: viewModel.image),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -138,11 +174,26 @@ class _BlueprintPageViewModel extends ChangeNotifier {
   int indexOfImages;
   int countOfImages;
   Uint8List? image;
+  Size? imageSize;
 
   _BlueprintPageViewModel(this.blueprint)
       : indexOfImages = 0,
         countOfImages = blueprint.images.length,
-        image = blueprint.images.firstOrNull;
+        image = blueprint.images.firstOrNull {
+    developer.log(
+        'init _BlueprintPageViewModel for: ${blueprint.name}, image: ${image.hashCode}');
+    updateImageSize();
+  }
+
+  void updateImageSize() async {
+    if (image != null) {
+      final img = await decodeImageFromList(image!);
+      imageSize = Size(img.width.toDouble(), img.height.toDouble());
+    } else {
+      imageSize = null;
+    }
+    notifyListeners();
+  }
 
   bool isPreviousImageAvailable() {
     return indexOfImages > 0;
@@ -156,6 +207,7 @@ class _BlueprintPageViewModel extends ChangeNotifier {
     if (isPreviousImageAvailable()) {
       indexOfImages--;
       image = blueprint.images[indexOfImages];
+      updateImageSize();
       notifyListeners();
     }
   }
@@ -164,6 +216,7 @@ class _BlueprintPageViewModel extends ChangeNotifier {
     if (isNextImageAvailable()) {
       indexOfImages++;
       image = blueprint.images[indexOfImages];
+      updateImageSize();
       notifyListeners();
     }
   }
