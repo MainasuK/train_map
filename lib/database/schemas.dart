@@ -17,6 +17,7 @@ class _Catalog {
 
 @RealmModel()
 class _Blueprint {
+  @PrimaryKey()
   late final ObjectId id;
 
   /// 总成编号

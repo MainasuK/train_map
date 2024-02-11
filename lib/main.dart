@@ -12,8 +12,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // setup realm
+
   final realmConfiguration = Configuration.local(
-    [Catalog.schema, Blueprint.schema, Part.schema],
+    [Catalog.schema, Blueprint.schema, Part.schema], schemaVersion: 2,
+    migrationCallback: ((migration, oldSchemaVersion) {
+      // if oldSchemaVersion < 3 {
+      // }
+      if (oldSchemaVersion < 2) {
+        // add primary key 'id' for Blueprint
+      }
+    }),
     // shouldDeleteIfMigrationNeeded: true,
   );
   log('setup realm at path: ${realmConfiguration.path}');

@@ -138,7 +138,7 @@ class Blueprint extends _Blueprint
   static SchemaObject _initSchema() {
     RealmObjectBase.registerFactory(Blueprint._);
     return const SchemaObject(ObjectType.realmObject, Blueprint, 'Blueprint', [
-      SchemaProperty('id', RealmPropertyType.objectid),
+      SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
       SchemaProperty('index', RealmPropertyType.string),
       SchemaProperty('code', RealmPropertyType.string),
       SchemaProperty('name', RealmPropertyType.string),

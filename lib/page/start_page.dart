@@ -24,6 +24,8 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   final scrollController = ScrollController();
+  final catalogAndBlueprintController = TextEditingController();
+  final partController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +75,7 @@ class _StartPageState extends State<StartPage> {
     final viewModel = context.watch<_StartPageViewModel>();
 
     return TextField(
+      controller: catalogAndBlueprintController,
       autocorrect: false,
       placeholder: "图册名称	总成编号	备件图号	名称	备注",
       minLines: 4,
@@ -118,6 +121,7 @@ class _StartPageState extends State<StartPage> {
     final viewModel = context.watch<_StartPageViewModel>();
 
     return TextField(
+      controller: partController,
       autocorrect: false,
       placeholder: "代号	物资编码	零件名称	进口零件号	国产零件号	本总成数量	备注",
       minLines: 10,
@@ -259,6 +263,10 @@ class _StartPageState extends State<StartPage> {
       body: const Text('创建图纸'),
       onPressed: () {
         viewModel.create(context);
+
+        // clear text input
+        catalogAndBlueprintController.clear();
+        partController.clear();
       },
     );
   }
@@ -374,9 +382,17 @@ class _StartPageViewModel extends ChangeNotifier {
       }
       blueprint.images.addAll(images);
       catalog.blueprints.add(blueprint);
+      log('存储 blueprint：${blueprint.id} ${blueprint.name}');
 
       // part
       blueprint.parts.addAll(parts);
+
+      // clear
+      catalogs = [];
+      blueprints = [];
+      this.parts = [];
+      files = [];
+      notifyListeners();
     });
   }
 }
