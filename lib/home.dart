@@ -178,7 +178,8 @@ class _HomeState extends State<Home> {
 class HomeViewModel extends ChangeNotifier {
   // input
   final realm = main.App.realm;
-  late StreamSubscription<RealmResultsChanges<Catalog>> catalogSubscription;
+  late final StreamSubscription<RealmResultsChanges<Catalog>>
+      catalogSubscription;
 
   // output
   List<Catalog> catalogs = [];
@@ -189,7 +190,11 @@ class HomeViewModel extends ChangeNotifier {
 
   HomeViewModel() {
     catalogs = realm.all<Catalog>().toList();
-    catalogSubscription = main.App.realm.all<Catalog>().changes.listen((event) {
+    _initNotificationRealm();
+  }
+
+  Future<void> _initNotificationRealm() async {
+    catalogSubscription = realm.all<Catalog>().changes.listen((event) {
       catalogs = event.results.toList();
       notifyListeners();
     });
